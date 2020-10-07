@@ -22,4 +22,4 @@ Features:
 - Can edit appearance and styles of the text
 - Clear button
 - Save button
-- Code previews work for react components
+- React playground
