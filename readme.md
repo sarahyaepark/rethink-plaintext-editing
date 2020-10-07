@@ -14,7 +14,6 @@ Once complete, please email us a link to your forked repo with clean, tested cod
 - Rethink Engineering
 
 Review:
-- Code previews work only for React at the moment
 - In the future, I would like to add the option to add/delete files
 
 Features:
@@ -23,3 +22,4 @@ Features:
 - Can edit appearance and styles of the text
 - Clear button
 - Save button
+- Code previews work for react components
