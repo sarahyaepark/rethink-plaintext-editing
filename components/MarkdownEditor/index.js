@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import css from '../PlaintextEditor/style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-nextjs-toast';
 
 function MarkdownEditor({ file, write }) {

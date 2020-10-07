@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
+import Buttons from '../Buttons.js'
 import css from './style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-nextjs-toast';
 
 function PlaintextEditor({ file, write }) {
@@ -67,6 +66,8 @@ function PlaintextEditor({ file, write }) {
       />
       <br />
       <ToastContainer />
+      <Buttons handleSave={handleSave} clearCurrent={clearCurrent}/>
+      {/* <ToastContainer />
       <div className={css.buttons}>
         <Button className={css.delete} variant="danger" onClick={clearCurrent}>
           Clear
@@ -74,7 +75,7 @@ function PlaintextEditor({ file, write }) {
         <Button className={css.save} variant="success" onClick={handleSave}>
           Save
         </Button>
-      </div>
+      </div> */}
     </div>
   ) : (
     <img src="https://miro.medium.com/max/1600/1*CsJ05WEGfunYMLGfsT2sXA.gif" />

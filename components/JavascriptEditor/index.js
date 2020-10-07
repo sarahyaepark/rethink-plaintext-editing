@@ -1,46 +1,38 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import css from '../PlaintextEditor/style.css';
-import { toast, ToastContainer } from 'react-nextjs-toast';
-import { LiveProvider, LivePreview, LiveError } from 'react-live';
-import Buttons from '../Buttons.js'
 
-function PreviewEditor({ file, write }) {
-  const currentRef = useRef();
+import css from '../PlaintextEditor/style.css';
+import Buttons from '../Buttons.js'
+import { toast, ToastContainer } from 'react-nextjs-toast';
+import { CopyBlock, dracula } from "react-code-blocks";
+
+function JavascriptEditor({ file, write }) {
   let [value, setValue] = useState('nothing yet');
-  const [textLoaded, setTextLoaded] = useState(false);
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const { LiveEditor } = currentRef.current || {};
+
   useEffect(() => {
+    // this block loads the existing file text or changed content
     (async () => {
       let changedTxt = localStorage.getItem(file.name);
-      // first checks if there is file content, then checks the local storage
-      // if both don't exist, the original text gets called
       if (file.content) {
         setValue(file.content);
       } else if (changedTxt !== null) {
         setValue(changedTxt);
       } else {
-        let initText = await file.text();
-        setValue(initText);
+        setValue(await file.text());
       }
-      setTextLoaded(true);
     })();
-    currentRef.current = {
-      LiveEditor: require('react-live').LiveEditor
-    };
     setEditorLoaded(true);
   }, [file]);
 
-  const handleChange = content => {
-    write(file, content);
-    setValue(content);
+  const handleChange = (event) => {
+    write(file, event.target.value);
+    setValue(event.target.value);
   };
 
   // save button grabs the content from local storage and writes it to the file
   // the save button is mostly for the user to feel assured
   const handleSave = () => {
-    // let changedTxt = localStorage.getItem(file.name);
     write(file, value);
     toast.notify('', {
       duration: 2,
@@ -48,20 +40,23 @@ function PreviewEditor({ file, write }) {
       title: '🦄 Saved!'
     });
   };
-
   const clearCurrent = () => {
-    setValue('');
+    setValue(' ');
   };
-  
-  return editorLoaded && textLoaded ? (
+  return editorLoaded ? (
     <div className={css.editor}>
-      <LiveProvider code={value}>
-        <LiveEditor onChange={handleChange} />
-        <LivePreview />
-        <LiveError />
-      </LiveProvider>
-      <br />
+      <CopyBlock
+          language={'javascript'}
+          text={value}
+          showLineNumbers={true}
+          theme={dracula}
+          wrapLines={true}
+          codeBlock
+          className={css.editorPreview}
+        />
+      <br/>
       <ToastContainer />
+      <textarea className={css.jsEditor} value={value} onChange={handleChange}/>
       <br />
       <Buttons handleSave={handleSave} clearCurrent={clearCurrent}/>
     </div>
@@ -70,9 +65,9 @@ function PreviewEditor({ file, write }) {
   );
 }
 
-PreviewEditor.propTypes = {
+JavascriptEditor.propTypes = {
   file: PropTypes.object,
   write: PropTypes.func
 };
 
-export default PreviewEditor;
+export default JavascriptEditor;

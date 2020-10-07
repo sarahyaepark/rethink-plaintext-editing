@@ -9,7 +9,8 @@ import { listFiles } from '../files';
 // Used below, these need to be registered
 import MarkdownEditor from '../components/MarkdownEditor';
 import PlaintextEditor from '../components/PlaintextEditor';
-import JavascriptEditor from '../components/PreviewEditor';
+import PreviewEditor from '../components/PreviewEditor';
+import JavascriptEditor from '../components/JavascriptEditor'
 import IconPlaintextSVG from '../public/icon-plaintext.svg';
 import IconMarkdownSVG from '../public/icon-markdown.svg';
 import IconJavaScriptSVG from '../public/icon-javascript.svg';
@@ -22,6 +23,7 @@ const TYPE_TO_ICON = {
   'text/plain': IconPlaintextSVG,
   'text/markdown': IconMarkdownSVG,
   'text/javascript': IconJavaScriptSVG,
+  'react/javascript': IconJavaScriptSVG,
   'application/json': IconJSONSVG
 };
 
@@ -103,7 +105,8 @@ const REGISTERED_EDITORS = {
   'text/plain': PlaintextEditor,
   'text/markdown': MarkdownEditor,
   'text/javascript': JavascriptEditor,
-  'application/json': PlaintextEditor
+  'application/json': PlaintextEditor,
+  'react/javascript': PreviewEditor
 };
 
 function PlaintextFilesChallenge() {
