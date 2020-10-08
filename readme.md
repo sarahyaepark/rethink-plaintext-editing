@@ -6,6 +6,7 @@ To run the challenge:
 
 - FORK this repo
 - Download forked repo and run `npm install && npm run dev`
+- Using node v 14.13.1 (latest)
 - Open `localhost:3000` in your browser
 - Enjoy
 
